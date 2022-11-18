@@ -1,0 +1,25 @@
+{
+  "name": "group-4-bookology-social-media",
+  "version": "1.0.0",
+  "description": "Group 4 project 2 collaboration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fuuko08/Group-4-Bookology-Social-Media.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fuuko08/Group-4-Bookology-Social-Media/issues"
+  },
+  "homepage": "https://github.com/fuuko08/Group-4-Bookology-Social-Media#readme",
+  "dependencies": {
+    "inquirer": "^9.1.4",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.20"
+  }
+}
