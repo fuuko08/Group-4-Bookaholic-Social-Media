@@ -39,4 +39,4 @@ Like.belongsTo(Post, {
     foreignKey: 'postId',
 })
 
-module.exports = { User, Comment, Post };
+module.exports = { User, Comment, Post, Like };
