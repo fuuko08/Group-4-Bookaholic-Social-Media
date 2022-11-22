@@ -10,7 +10,7 @@ Comment.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        user_id: {
+        user_Id: {
             type : DataTypes.STRING,
             allowNull : false,
         },
@@ -18,7 +18,7 @@ Comment.init(
             type : DataTypes.STRING,
             allowNull : false,
         },
-        post_id : {
+        post_Id : {
             type : DataTypes.INTEGER,
             allowNull : false,
             
