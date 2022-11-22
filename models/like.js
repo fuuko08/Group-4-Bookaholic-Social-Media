@@ -10,12 +10,12 @@ Like.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        post_Id : {
+        postId : {
             type : DataTypes.INTEGER,
             allowNull : false,
 
         },
-        user_Id : {
+        userId : {
             type : DataTypes.STRING,
             allowNull : false,
         },
