@@ -36,7 +36,7 @@ Post.hasMany(Like, {
 })
 
 Like.belongsTo(Post, {
-    foreignKey: postId,
+    foreignKey: 'postId',
 })
 
 module.exports = { User, Comment, Post };
