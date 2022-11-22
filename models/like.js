@@ -19,6 +19,10 @@ Like.init(
             type : DataTypes.STRING,
             allowNull : false,
         },
+        like : {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        }
 
     },
     {
