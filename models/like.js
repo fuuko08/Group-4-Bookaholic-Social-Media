@@ -1,8 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
 
-class Comment extends Model {}
+class Like extends Model {}
 
-Comment.init(
+Like.init(
     {
         id : {
             type: DataTypes.INTEGER,
@@ -10,26 +10,23 @@ Comment.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        user_id: {
-            type : DataTypes.STRING,
-            allowNull : false,
-        },
-        comment : {
-            type : DataTypes.STRING,
-            allowNull : false,
-        },
         post_id : {
             type : DataTypes.INTEGER,
             allowNull : false,
-            
-        }
+
+        },
+        user_id : {
+            type : DataTypes.STRING,
+            allowNull : false,
+        },
+
     },
     {
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'Comment',
+        modelName: 'painting',
       }
-);
+)
 
-module.exports = Comment;
+module.exports = Like;
