@@ -1,0 +1,26 @@
+
+body{background-color:#eee}
+
+
+/* Navbar */
+.bg-custom {
+    background-color: white;
+    margin-bottom: -20px;
+}
+
+.time{font-size: 9px !important}
+.socials i{margin-right: 14px;font-size: 17px;color: #d2c8c8;cursor: pointer}
+.feed-image img{width: 100%;height: auto} 
+
+#createBtn {
+    margin-left: -14px;
+    width: 128px;
+}
+
+#commentBtn {
+    width: 50px;
+    background-color: green;
+    border-color: darkgreen;
+    border-style: none;
+}
+
