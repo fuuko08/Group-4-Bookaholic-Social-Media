@@ -2,7 +2,7 @@
   "name": "group-4-bookology-social-media",
   "version": "1.0.0",
   "description": "Group 4 project 2 collaboration",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,8 +18,19 @@
   },
   "homepage": "https://github.com/fuuko08/Group-4-Bookology-Social-Media#readme",
   "dependencies": {
-    "inquirer": "^9.1.4",
-    "mysql2": "^2.3.3",
-    "nodemon": "^2.0.20"
+    "bcrypt": "^5.0.0",
+    "connect-session-sequelize": "^7.0.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "express-session": "^1.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^6.15.0",
+    "prettier": "^2.1.2"
   }
 }
