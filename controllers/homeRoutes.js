@@ -6,35 +6,117 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
     try {
         const dbPostData = await Post.findAll ({
-            include: [User]
-        })
+            attributes: ['id', 'title', 'content', 'image', 'created_at'],
+            include: [
+                {
+                    model: Comment,
+                    attributes: ['id', 'comment', 'postId', 'userId', 'created_at'],
+                    include: {
+                        model: User,
+                        attributes: ['username'],
+                    },
+                },
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Like,
+                    attributes: ['like'],
+                },
+            ],
+        });
+
         const posts = dbPostData.map((post) => post.get({ plain: true }));
 
-        res.render('homepage', { posts, loggedIn: req.session.loggedIn});
+        res.render('homepage', 
+            { posts, 
+            loggedIn: req.session.loggedIn,
+            username: req.session.username,                    
+            like: res.session.like}); //double check                                        
     } catch (err) {
         res.status(500).json(err)
     }
 });
 
 // Get one post
-router.get('/post/:id', withAuth, async (req, res) => {
+router.get('/post/:id', async (req, res) => {
     try {
         const dbPostData = await Post.findOne({
             where: {id: req.params.id},
+            attributes: ['id', 'title', 'content', 'image', 'created_at'],
             include: [
-                User, 
                 {
                     model: Comment,
-                    include: [User],
+                    attributes: ['id', 'comment', 'postId', 'userId', 'created_at'],
+                    include: {
+                        model: User,
+                        attributes: ['username'],
+                    },
+                },
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Like,
+                    attributes: ['like'],
                 },
             ],
         });
         if (dbPostData) {
             const posts = dbPostData.get({ plain: true });
 
-            res.render('onepost', { posts, loggedIn: req.session.loggedIn})
+            res.render('onepost', { 
+                posts, 
+                loggedIn: req.session.loggedIn,
+                username: req.session.username,
+                like: req.session.like, 
+            });
         } else {
-            res.status(404).end();
+            res.status(404).json({ message: "This user has no post." });
+            return;
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Get comments on the post
+router.get('/post-comment', async (req, res) => {
+    try {
+        const dbPostData = await Post.findOne({
+            where: {id: req.params.id},
+            attributes: ['id', 'title', 'content', 'image', 'created_at'],
+            include: [
+                {
+                    model: Comment,
+                    attributes: ['id', 'comment', 'postId', 'userId', 'created_at'],
+                    include: {
+                        model: User,
+                        attributes: ['username'],
+                    },
+                },
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Like,
+                    attributes: ['like'],
+                },
+            ],
+        });
+        if (dbPostData) {
+            const post = dbPostData.get({ plain: true });
+            res.render('post-comment', {
+                post, 
+                loggedIn: req.session.loggedIn,
+                username: req.session.username,
+            });
+        } else {
+            res.status(404).json({ message: "This user has no post." });
+            return;
         }
     } catch (err) {
         res.status(500).json(err);
@@ -44,7 +126,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
 // Login
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
-        res.redirect('/dashboard');
+        res.redirect('/');
         return;
     }
     res.render('login');
@@ -52,10 +134,6 @@ router.get('/login', (req, res) => {
 
 // Signup
 router.get('/signup', (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/dashboard');
-        return;
-    }
     res.render('signup');
 });
 
