@@ -11,11 +11,6 @@ class Post extends Model {}
                 primaryKey: true,
                 autoIncrement: true,
             },
-            title: {
-                type: DataTypes.STRING,
-                allowNull: false,
-                unique: true,
-            },
             content: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -25,6 +20,10 @@ class Post extends Model {}
                 type: DataTypes.STRING,
                 allowNull: false,
                 validate: { notEmpty: true }
+            },
+            like: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
             },
             userId: {
                 type: DataTypes.INTEGER,

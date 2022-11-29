@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User, Comment, Like } = require('../models');
+const { Post, User, Comment,} = require('../models');
 const withAuth = require('../utils/auth');
 const sequelize = require('../config/connection');
 
@@ -7,7 +7,7 @@ const sequelize = require('../config/connection');
 router.get('/', async (req, res) => {
     try {
         const dbPostData = await Post.findAll ({
-            attributes: ['id', 'title', 'content', 'image', 'created_at'],
+            attributes: ['id', 'like', 'content', 'image', 'created_at'],
             include: [
                 {
                     model: Comment,
@@ -20,10 +20,6 @@ router.get('/', async (req, res) => {
                 {
                     model: User,
                     attributes: ['username'],
-                },
-                {
-                    model: Like,
-                    attributes: ['like'],
                 },
             ],
         });
@@ -45,7 +41,7 @@ router.get('/post/:id', async (req, res) => {
     try {
         const dbPostData = await Post.findOne({
             where: {id: req.params.id},
-            attributes: ['id', 'title', 'content', 'image', 'created_at'],
+            attributes: ['id', 'like', 'content', 'image', 'created_at'],
             include: [
                 {
                     model: Comment,
@@ -58,10 +54,6 @@ router.get('/post/:id', async (req, res) => {
                 {
                     model: User,
                     attributes: ['username'],
-                },
-                {
-                    model: Like,
-                    attributes: ['like'],
                 },
             ],
         });
@@ -88,7 +80,7 @@ router.get('/post-comment', async (req, res) => {
     try {
         const dbPostData = await Post.findOne({
             where: {id: req.params.id},
-            attributes: ['id', 'title', 'content', 'image', 'created_at'],
+            attributes: ['id', 'like', 'content', 'image', 'created_at'],
             include: [
                 {
                     model: Comment,
@@ -101,10 +93,6 @@ router.get('/post-comment', async (req, res) => {
                 {
                     model: User,
                     attributes: ['username'],
-                },
-                {
-                    model: Like,
-                    attributes: ['like'],
                 },
             ],
         });

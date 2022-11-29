@@ -9,7 +9,7 @@ User.hasMany(Post, {
 });
 
 User.hasMany(Comment, {
-    foreignKey: 'uderId',
+    foreignKey: 'userId',
     onDelete: 'CASCADE'
 });
 
@@ -31,16 +31,16 @@ Post.hasMany(Comment, {
     onDelete: 'CASCADE'
 });
 
-Post.hasMany(Like, {
-    foreignKey: 'likeId',
-})
+// Post.hasMany(Like, {
+//     foreignKey: 'likeId',
+// })
 
-Like.belongsTo(Post, {
-    foreignKey: 'postId',
-})
+// Like.belongsTo(Post, {
+//     foreignKey: 'postId',
+// })
 
-Like.belongsTo(User, {
-    foreignKey: 'userId'
-})
+// Like.belongsTo(User, {
+//     foreignKey: 'userId'
+// })
 
-module.exports = { User, Comment, Post, Like };
+module.exports = { User, Comment, Post} ;
