@@ -12,7 +12,7 @@ class Post extends Model {}
                 autoIncrement: true,
             },
             title: {
-                type: DataTypes.STRING(20),
+                type: DataTypes.STRING,
                 allowNull: false,
                 unique: true,
             },
@@ -36,7 +36,6 @@ class Post extends Model {}
         },
         {
             sequelize,
-            timestamps: false,
             freezeTableName: true,
             underscored: true,
             modelName: 'post',

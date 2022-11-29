@@ -11,26 +11,32 @@ Like.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        postId : {
+        postId: {
             type : DataTypes.INTEGER,
             allowNull : false,
-
+            references: {
+                model: 'post',
+                key: 'id',
+            },
         },
-        userId : {
+        userId: {
             type : DataTypes.STRING,
             allowNull : false,
+            references: {
+                model: 'user',
+                key: 'id',
+            },
         },
-        like : {
+        like: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
         }
-
     },
     {
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'painting',
+        modelName: 'like',
       }
 )
 
