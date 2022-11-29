@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const  Like = require('../../models/Comment');
+const  Like = require('../../models/like');
 
 router.post("/", async (req, res) => {
     try {
@@ -9,11 +9,31 @@ router.post("/", async (req, res) => {
             like : req.body.like,
             postId : req.body.postId
         })
-        res.status(200).json(commentData);
+        res.status(200).json(likeData);
     }catch(err){
         res.status(400).json(err);
     }
     
 });  
 
+router.put('/', async (req,res) =>{
+    try {
+        const likeData = await Comment.create(
+        {
+            id : req.body.id,
+            userId : req.body.userId,
+            comment : req.body.comment,
+            postId : req.body.postId
+        },
+        {
+            where : {
+                id: req.body.id,
+            }
+        });
+        res.status(200).json(likeData)
+    }catch (err) {
+        res.status(400).json(err)
+    }
+
+})
 module.exports = commentPost;
