@@ -17,22 +17,27 @@
 
 <body>
   	<!-- Header -->
-    <nav class="navbar navbar-expand-sm navbar-light bg-custom" style="background-color: white;">
-      <a class="navbar-brand" href="#">
-        <img src="./images/bookstack2.png" width="32" height="32" class="d-inline-block align-top my-color" alt="Stack of Books">
-        Bookaholics
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse">
-          <div class="navbar-nav ml-auto">
-            <a class="nav-item nav-link" href="/">Home</a>
-            <a class="nav-item nav-link" href="/profile">Profile</a>
-            <a class="nav-item nav-link" href="/signout">Sign Out</a>
-          </div>
+  <nav class="navbar navbar-expand-sm navbar-light bg-custom" style="background-color: white;">
+    <a class="navbar-brand" href="#">
+      <img src="./images/bookstack2.png" width="32" height="32" class="d-inline-block align-top my-color" alt="Stack of Books">
+      Bookaholics
+    </a>
+      <button class="navbar-toggler" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+        <a class="nav-item nav-link" href="/">Home</a>
+        <a class="nav-item nav-link" href="/profile">Profile</a>
+        <a class="nav-item nav-link" href="/signout">Sign Out</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <div class="navbar-nav ml-auto">
+          <a class="nav-item nav-link" href="/">Home</a>
+          <a class="nav-item nav-link" href="/profile">Profile</a>
+          <a class="nav-item nav-link" href="/signout">Sign Out</a>
         </div>
-    </nav>
+      </div>
+	</nav>
 	<!-- Page content -->
   <section class="h-100 gradient-custom-2">
     <div class="container mt-4 mb-5">
@@ -92,11 +97,9 @@
                     <!-- Upload image input-->
                     <div class="input-group px-3 col-md-3">
                       <input id="upload" type="file" onchange="readURL(this);">
-                      <!-- <label id="upload-label" for="upload" class="font-weight-light text-muted">Upload Photo</label> -->
                       <div class="input-group-append">
                       <label for="upload"><img src="./images/photo-upload.png" width="45"></label>
                       </div>
-                    <!-- <label id="upload-label" for="upload" width="90">Upload</label> -->
                   </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -105,32 +108,38 @@
               </div>
             </div>
           </div>
-          <div class="feed-icon px-2"><i class="fa fa-long-arrow-up text-black-50"></i></div>
+          <div class="feed-icon px-2"><i class="text-black-50"></i></div>
         </div>
         <!-- First post -->
         <div class="bg-white border mt-2">
-          <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">
           <div>
-          <div class="d-flex flex-row align-items-center feed-text px-2"><img class="rounded-circle" src="./images/avatar.jpg" width="45">
-            <div class="d-flex flex-column flex-wrap ml-2"><span class="font-weight-bold">Cory Williams</span><span class="text-black-50 time">40 minutes ago</span>
+            <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">
+              <div class="d-flex flex-row align-items-center feed-text px-2"><img class="rounded-circle" src="./images/avatar.jpg" width="45">
+                <div class="d-flex flex-column flex-wrap ml-2"><span class="font-weight-bold">Cory Williams</span><span class="text-black-50 time">40 minutes ago</span>
+                </div>
+              </div>
+              <a class="dropdown" id="post-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="./images/menu.png" width="18">
+              </a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#">Delete Post</a>
+                <a class="dropdown-item" href="#">Edit Post</a>
+              </div>
             </div>
           </div>
-          <div class="feed-icon px-2"><i class="fa fa-ellipsis-v text-black-50"></i>
-        </div>
-        </div>
-          </div>
-          <div class="p-2 px-3"><span>Let's talk about your favorite books.</span>
-          </div>
-          <div class="d-flex justify-content-end socials p-2 py-3"><i class="fa fa-thumbs-up"></i><i class="fa fa-comments-o"></i><i class="fa fa-share"></i></div>
+            <div class="p-2 px-3"><span>Let's talk about your favorite books.</span>
+            </div>
+            <div class="d-flex justify-content-end socials p-2 py-3">
+            </div>
         </div>
         <!-- Likes link-->
         <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white border">
           <ul class="media-list">
             <li class="media">
               <a href="#" class="link-primary">
-                <img class="like" src="./images/heart.png" width="20">
-                <medium class="align-items-center text-muted mb-3" data-toggle="modal" data-target="#exampleModalComment">3 Likes
-              </a>
+                <img class="like" src="./images/heart_icon_red.png" width="19">
+                <medium class="align-items-center text-muted mb-3" id="likes-text" data-toggle="modal" data-target="#exampleModalComment">3 Likes
+                </a>
                 <!-- Likes Modal -->
                 <div class="modal fade" id="exampleModalComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -182,24 +191,30 @@
                     </div>
                   </div>
                 </div>
-                <div class="feed-icon px-2"><i class="fa fa-long-arrow-up text-black-50"></i>
+                <div class="feed-icon px-2"><i class="text-black-50"></i>
                 </div>
               </div>
             </li>
-            <br>  
+            <br>
             <li class="media">
-              <a href="#" class="pull-left" id="comment-avatar">
-                <img class="rounded-circle" src="./images/avatar.jpg" width="45">
-              </a>
-              <div class="media-body">
-                <strong>Cory Williams</strong>
-                <span class="text-muted pull-right">
+            <a href="#" class="pull-left" id="comment-avatar">
+              <img class="rounded-circle" src="./images/avatar.jpg" width="45">
+            </a>
+            <div class="media-body">
+              <strong>Cory Williams</strong>
+              <span class="text-muted pull-right">
                   <small class="text-muted">50 minutes ago</small>
-                </span>
-                <p>
-                  I'll share my list soon.
-                </p>
+              </span>
+                <a class="dropdown" id="x-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src="./images/down_arrow.png" width="8">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" href="#">Delete Comment</a>
               </div>
+              <p>
+                I'll share my list soon.
+              </p>
+            </div>
             </li>
             <li class="media">
               <a href="#" class="pull-left" id="comment-avatar"> 
@@ -210,6 +225,12 @@
                 <span class="text-muted pull-right">
                     <small class="text-muted">40 minutes ago</small>
                 </span>
+                <a class="dropdown" id="x-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src="./images/down_arrow.png" width="8">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" href="#">Delete Comment</a>
+              </div>
                 <p>
                   I'm reading several books now.  A couple of them are interesting and I'll post a photo soon.
                 </p>
@@ -224,6 +245,12 @@
               <span class="text-muted pull-right">
                   <small class="text-muted">30 minutes ago</small>
               </span>
+              <a class="dropdown" id="x-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="./images/down_arrow.png" width="8">
+              </a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#">Delete Comment</a>
+            </div>
               <p>
                 Let's do it.
               </p>
@@ -231,100 +258,124 @@
             </li>
             <li class="media">
               <!-- <a href="#" class="pull-left" id="comment-avatar">
-                <img class="rounded-circle" src="./images/avatar.jpg" width="45">
+                <img class="rounded-circle" src="./images/avatar.jpg" width="37">
               </a> -->
               <div class="feed-text ml-5 px-0 col-md-8" id="comment">
                   <input class="form-control" id="commentInput" placeholder="Add a comment...">
               </div>
-              <div class="feed-icon px-2"><i class="fa fa-long-arrow-up text-black-50"></i>
+              <div class="feed-icon px-2"><i class="text-black-50"></i>
               </div>
               <div class="feed-text px-2">
                 <button type="button" id="commentBtn" class="btn btn-primary btn-sm comment-button">Add</button>
               </div>
             </li>
-            </ul>
-          </div>
-          <!-- Second post -->
-          <div class="bg-white border mt-2">
+          </ul>
+        </div>
+        <!-- Second post -->
+        <div class="bg-white border mt-2">
+          <div>
             <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">
-            <div>
-            <div class="d-flex flex-row align-items-center feed-text px-2"><img class="rounded-circle" src="./images/avatar.jpg" width="45">
-              <div class="d-flex flex-column flex-wrap ml-2"><span class="font-weight-bold">Cory Williams</span><span class="text-black-50 time">40 minutes ago</span>
+              <div class="d-flex flex-row align-items-center feed-text px-2"><img class="rounded-circle" src="./images/avatar.jpg" width="45">
+                <div class="d-flex flex-column flex-wrap ml-2"><span class="font-weight-bold">Cory Williams</span><span class="text-black-50 time">40 minutes ago</span>
+                </div>
               </div>
-            </div>
-            <div class="feed-icon px-2"><i class="fa fa-ellipsis-v text-black-50"></i>
-          </div>
-          </div>
-            </div>
-            <div class="p-2 px-3"><span>Some oldies.</span>
-            </div>
-            <div class="feed-image p-2 px-3"><img class="img-fluid img-responsive" src="./images/bookstack3.png"></div>
-            <div class="d-flex justify-content-end socials p-2 py-3"><i class="fa fa-thumbs-up"></i><i class="fa fa-comments-o"></i><i class="fa fa-share"></i></div>
-          </div>
-          <!-- Add a comment to second post-->
-          <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white border">
-            <ul class="media-list">
-              <li class="media">
-                <img class="like" src="./images/heart.png" width="20">
-              <medium class="align-items-center text-muted mb-3">0 Likes</medium>
-              </li>
-              <li class="media">
-                <a href="#" class="pull-left" id="comment-avatar">
-                  <img class="rounded-circle" src="./images/avatar.jpg" width="45">
-                </a>
-                <div class="media-body">
-                  <strong>Cory Williams</strong>
-                  <span class="text-muted pull-right">
-                      <small class="text-muted">48 minutes ago</small>
-                  </span>
-                  <p>
-                    Oldies.
-                  </p>
-                </div>
-              </li>
-              <li class="media">
-                <a href="#" class="pull-left" id="comment-avatar"> 
-                  <img class="rounded-circle" src="./images/sarah.jpg" width="45">
-                </a>
-                <div class="media-body">
-                  <strong>Sarah Walker</strong>
-                  <span class="text-muted pull-right">
-                      <small class="text-muted">35 minutes ago</small>
-                  </span>
-                  <p>
-                    What are the titles of those books?  Curious to hear more about some of your favorite titles.
-                  </p>
-                </div>
-              </li>
-              <li class="media">
-              <a href="#" class="pull-left" id="comment-avatar">
-                <img class="rounded-circle" src="./images/jim.jpg" width="45">
+              <a class="dropdown" id="post-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="./images/menu.png" width="18">
               </a>
-              <div class="media-body">
-                <strong>Jim Thompson</strong>
-                <span class="text-muted pull-right">
-                  <small class="text-muted">32 minutes ago</small>
-                </span>
-                <p>
-                  Interesting choices.
-                </p>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#">Delete Post</a>
+                <a class="dropdown-item" href="#">Edit Post</a>
               </div>
-              </li>
-              <li class="media">
-                <!-- <a href="#" class="pull-left" id="comment-avatar">
-                  <img class="rounded-circle" src="./images/avatar.jpg" width="45">
-                </a> -->
-                <div class="feed-text ml-5 px-0 col-md-8" id="comment">
-                    <input class="form-control" id="commentInput" placeholder="Add a comment...">
-                </div>
-                <div class="feed-icon px-2"><i class="fa fa-long-arrow-up text-black-50"></i>
-                </div>
-                <div class="feed-text px-2">
-                  <button type="button" id="commentBtn" class="btn btn-primary btn-sm comment-button">Add</button>
-                </div>
-              </li>
-            </ul>
+            </div>
           </div>
+          <div class="p-2 px-3"><span>Some oldies.</span>
+          </div>
+          <div class="feed-image p-2 px-3"><img class="img-fluid img-responsive" src="./images/bookstack3.png"></div>
+          <div class="d-flex justify-content-end socials p-2 py-3">
+          </div>
+        </div>
+        <!-- Add a comment to second post-->
+        <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white border">
+          <ul class="media-list">
+           <li class="media">
+             <img class="like" src="./images/heart.png" width="20">
+           <medium class="align-items-center text-muted mb-3">0 Likes</medium>
+           </li>
+           <li class="media">
+             <a href="#" class="pull-left" id="comment-avatar">
+               <img class="rounded-circle" src="./images/avatar.jpg" width="45">
+             </a>
+             <div class="media-body">
+               <strong>Cory Williams</strong>
+               <span class="text-muted pull-right">
+                   <small class="text-muted">48 minutes ago</small>
+               </span>
+               <a class="dropdown" id="x-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 <img src="./images/down_arrow.png" width="8">
+               </a>
+               <div class="dropdown-menu dropdown-menu-right">
+                 <a class="dropdown-item" href="#">Delete Comment</a>
+             </div>
+               <p>
+                 Oldies.
+               </p>
+             </div>
+           </li>
+           <li class="media">
+             <a href="#" class="pull-left" id="comment-avatar"> 
+               <img class="rounded-circle" src="./images/sarah.jpg" width="45">
+             </a>
+             <div class="media-body">
+               <strong>Sarah Walker</strong>
+               <span class="text-muted pull-right">
+                   <small class="text-muted">35 minutes ago</small>
+               </span>
+               <a class="dropdown" id="x-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 <img src="./images/down_arrow.png" width="8">
+               </a>
+               <div class="dropdown-menu dropdown-menu-right">
+                 <a class="dropdown-item" href="#">Delete Comment</a>
+             </div>
+               <p>
+                 What are the titles of those books?  Curious to hear more about some of your favorite titles.
+               </p>
+             </div>
+           </li>
+           <li class="media">
+           <a href="#" class="pull-left" id="comment-avatar">
+             <img class="rounded-circle" src="./images/jim.jpg" width="45">
+           </a>
+           <div class="media-body">
+             <strong>Jim Thompson</strong>
+             <span class="text-muted pull-right">
+               <small class="text-muted">32 minutes ago</small>
+             </span>
+             <a class="dropdown" id="x-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <img src="./images/down_arrow.png" width="8">
+             </a>
+             <div class="dropdown-menu dropdown-menu-right">
+               <a class="dropdown-item" href="#">Delete Comment</a>
+           </div>
+             <p>
+               Interesting choices.
+             </p>
+           </div>
+           </li>
+           <li class="media">
+             <!-- <a href="#" class="pull-left" id="comment-avatar">
+               <img class="rounded-circle" src="./images/avatar.jpg" width="45">
+             </a> -->
+             <div class="feed-text ml-5 px-0 col-md-8" id="comment">
+                 <input class="form-control" id="commentInput" placeholder="Add a comment...">
+             </div>
+             <div class="feed-icon px-2"><i class="text-black-50"></i>
+             </div>
+             <div class="feed-text px-2">
+               <button type="button" id="commentBtn" class="btn btn-primary btn-sm comment-button">Add</button>
+             </div>
+           </li>
+         </ul>
+       </div>
         </div>
       </div>
     </div>
