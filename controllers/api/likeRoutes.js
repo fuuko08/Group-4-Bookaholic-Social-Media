@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const  Comment = require('../../models/Comment');
+const  Like = require('../../models/Comment');
 
 router.post("/", async (req, res) => {
     try {
-        const commentData = await Comment.create({
+        const likeData = await Like.create({
             id : req.body.id,
             userId : req.body.userId,
-            comment : req.body.comment,
+            like : req.body.like,
             postId : req.body.postId
         })
         res.status(200).json(commentData);
