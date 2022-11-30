@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "missing3013",
+    "password": "new-strong-password",
     "database": "bookclub_db",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
