@@ -3,7 +3,14 @@ body{background-color:#eee}
 /* Navbar */
 .bg-custom {
     background-color: white;
-    margin-bottom: -20px;
+    margin-top: -20px;
+}
+
+.nav-item {
+    color: rgba(0,0,0,.5);
+}
+.nav-link:hover {
+    color: #212529;
 }
 
 .time{font-size: 9px !important}
@@ -20,11 +27,6 @@ body{background-color:#eee}
     background-color: green;
     border-color: darkgreen;
     border-style: none;
-}
-
-/* Navbar */
-#upload {
-    opacity: 0;
 }
 
 .image-area {
@@ -51,8 +53,21 @@ body{background-color:#eee}
     position: relative;
 }
 
+#upload {
+    opacity: 0;
+    position: fixed;
+    /* display: inline-block; */
+    /* position: relative; */
+    z-index: 1;
+    padding: 1em;
+    margin: -2em;
+    cursor: pointer;
+}
+
 /* Posts */
-body{margin-top:20px;}
+body {
+    margin-top:20px;
+}
 
 .comment-wrapper .panel-body {
     max-height:650px;
@@ -82,27 +97,49 @@ body{margin-top:20px;}
     padding-top: 5px;
 }
 
+#likes-text {
+    margin-left: -6px;
+}
+
 /* Likes Modal */
 #num-of-likes {
     margin-top: -12px;
+    margin-left: 40px;
+    margin-bottom: 20px;
 }
 
-#likes-list {
-    margin-left: 2px;
-    
+#likeBtn {
+    margin-top: 12px;
+    width: 54px;
+    background-color: green;
+    border-color: darkgreen;
+    border-style: none;
+    font-size: 15px;
 }
+
 
 #like-avatar {
     padding-right: 10px;
     margin-left: 2px;
 }
 
+#x-dropdown {
+  padding-left: 10px;  
+  opacity: 65%;
+}
 
-/* media screen */
-@media screen and (max-width: 568px) {
-#modal-input {
-display: flex;
-align-items: flex-start;
-/* margin-left: -100px; */
-}
-}
+/* Sign In & Sign Up Background */
+    .rounded-t-5 {
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+
+    @media (min-width: 992px) {
+      .rounded-tr-lg-0 {
+        border-top-right-radius: 0;
+      }
+
+      .rounded-bl-lg-5 {
+        border-bottom-left-radius: 0.5rem;
+      }
+    }
