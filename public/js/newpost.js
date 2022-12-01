@@ -22,11 +22,27 @@ const fileHandler = (event) => {
     reader.readAsDataURL(notFile);
     reader.onloadend = async () => {
         await uploadImage(reader.result);
+        await uploadContent();
         loading;
         document.location.replace('/');
     };
     reader.onerror = () => {
         console.log('Failed!');
+    };
+};
+
+const uploadContent = async (event) => {
+    event.preventDefault();
+
+    const content = document.querySelector('input[name="content"]').value;
+
+    const response = await fetch(`api/post`, {
+        method: 'POST',
+        body: JSON.stringify({ content }),
+        headers: { 'Content-Type': 'application/json' },
+    });
+    if (!response.ok) {
+        alert(response.statusText);
     };
 };
 

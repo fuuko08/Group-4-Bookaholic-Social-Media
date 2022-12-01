@@ -1,5 +1,5 @@
+//this is the comment form
 const postId = document.querySelector('input[name="post-id"]').value;
-console.log(postId);
 
 const commentFormHandler = async (event) => {
     event.preventDefault();

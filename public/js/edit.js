@@ -1,6 +1,6 @@
 const postId = document.querySelector('input[name="post-id"]').value;
 
-// Edit post
+// this is the edit form
 const editFormHandler = async (event) => {
     event.preventDefault();
     const title = document.querySelector('input[name="post-title"]').value.trim();
@@ -22,7 +22,7 @@ const editFormHandler = async (event) => {
     document.location.replace('/dashboard');
 };
 
-// Click on delete post
+// this is delete button
 const deleteHandler = async () => {
     await fetch(`/api/post/${postId}`, {
         method: 'DELETE'
