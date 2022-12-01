@@ -1,27 +1,30 @@
-const likePostHandler = async (event) => {
-    event.preventDefault();
+const likeBtn = document.querySelector('#like-btn');
 
-    let likes = 0;
+const likeHandler = async (event) => {
+    event.prevenDefault();
 
-    await fetch(`/api/post/${postId}`)
-        .then(resource => resource.json())
-        .then((data) => { likes = data.likes });
-    
-    let newLikes = likes + 1;
+    const id = document.querySelector('.post').id;
+    if (id) {
+        try {
+            const response = await fetch(`/api/like/${id}`, {
+                method: 'POST',
+            });
+            const element = document.getElementById('like-post');
+            const likes = document.querySelector('.likes-counter').getAttribute('data-value');
 
-    await fetch('/api/post/1', {
-        method: 'PATCH',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ "likes": newLikes })
-    });
-    if (response.ok) {
-        document.location.reload();
+            if (response.like) {
+                element.innerHTML = '';
+                element.innerHTML = `<i class="fas fa-heart"></i><span class='likes-counter' data-value=${likes + 1}> ${likes + 1} likes</span>`;
+            } else {
+                element.innerHTML = '';
+                element.innerHTML = `<i class="fas fa-heart"></i><span class='likes-counter' data-value=${likes - 1}> ${likes - 1} likes</span>`;
+            }
+        } catch (err) {
+            console.log("Failed!", err);
+        } 
     } else {
-        alert(response.statusText);
-    };
-
-    let likesText = `${newLikes} likes`;
-    return likesText;
+            console.log("Failed!", err);
+    }
 };
 
-document.querySelector('.like-btn').addEventListener('click', likePostHandler);
+likeBtn.addEventListener('click', likeHandler);
