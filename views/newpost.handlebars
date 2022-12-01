@@ -1,0 +1,33 @@
+<!-- Create a post modal -->
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Create a Post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <br>
+        <!-- Create a post enter text -->
+          <div class="form-group px-3 col-md-12">
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="post-content"placeholder="Type something...">{{post.content}}</textarea>
+          </div>
+              <!-- Upload image input-->
+              <div class="input-group px-3 col-md-2" id="modal-input">
+              <input id="upload" type="file" onchange="readURL(this);">
+              <div class="input-group-append" id="input-upload-icon">
+              <label for="upload"><img src="./images/photo-upload.png" width="45"></label>
+              </div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary">Post</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="feed-icon px-2"><i class="text-black-50"></i>
+  </div>
+</div>
+<script src="/js/newpost.js"></script>
