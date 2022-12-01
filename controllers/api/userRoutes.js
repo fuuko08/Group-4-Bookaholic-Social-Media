@@ -1,60 +1,48 @@
 const router = require('express').Router();
-const { Post, User, Comment } = require('../../models');
-const withAuth = require('../../utils/auth'); //we need to utilize this middleware
+const cloudinary = require('cloudinary').v2;
+const { User } = require('../../models');
+const withAuth = require('../../utils/auth'); 
+const urlCompiler = require('../../utils/helpers');
+const bcrypt = require('bcrypt');
 
-// Get all users
-router.get('/', async (req, res) => {
-    try {
-        const dbUserData = await User.findAll({
-            attributes: { exclude: ['password'] },
-        });
-        res.status(200).json(dbUserData);
-    } catch (err) {
-        res.status(400).json(err);
-    }
-});
-
-// Get 1 user
-router.get('/:id', async (req, res) => {
+// Get one User to login
+router.post('/login', async (req, res) => {
     try {
         const dbUserData = await User.findOne({
-            attributes: { exclude: ['password'] },
-            where: { id: req.params.id },
-            include: [
-                {
-                    model: Post,
-                    attributes: ['id', 'like', 'content', 'image', 'created_at']
-                },
-                {
-                    model: Comment,
-                    attributes: ['id', 'comment', 'created_at'],
-                    include: {
-                        model: Post,
-                        attributes: ['content'],
-                    },
-                },
-                {
-                    model: Post,
-                    attributes: ['content'],
-                },
-            ],
+            raw: true,
+            where: { username: req.body.name },
         });
+        
         if (!dbUserData) {
-            res.status(404).json({ message: `User id ${req.params.id} is not valid.`});
+            res.status(404).json({ message: "Failed to login!" });
             return;
         }
-        res.status(200).json(dbUserData);
+        const validPassword = await bcrypt.compare(
+            req.body.password,
+            dbUserData.password
+          );
+          if (!validPassword) {
+            res.status(400).json({ message: "Failed to login!" });
+            return;
+          }
+          req.session.save(() => {
+            req.session.userId = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
+            res.json({ success: true });
+          });
     } catch (err) {
-        res.status(400).json(err);
-    }
+        res.status(500).json(err);      
+    }    
 });
 
-
 // CREATE new user
-router.post('/', async (req, res) => {
+router.post('/signup', async (req, res) => {
   try {
-    const dbUserData = await User.create(req.body);
-    console.table(req.body);
+    const dbUserData = await User.create({
+        username: req.body.username,
+        password: req.body.password,
+    });
     req.session.save(() => {
         req.session.userId = dbUserData.id;
         req.session.username = dbUserData.username;
@@ -62,54 +50,27 @@ router.post('/', async (req, res) => {
         res.status(201).json({ message: `Account created for ${dbUserData.username}`});
     });
   } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-// Login
-router.post('/login', async (req, res) => {
-  try {
-    const dbUserData = await User.findOne({
-      where: { username: req.body.username },
-    });
-
-    if (!dbUserData) {
-      res.status(400).json({ message: 'Incorrect username or password. Please try again!' });
-      return;
-    };
-
-    const validPassword = await dbUserData.checkPassword(req.body.password);
-
-    if (!validPassword) {
-      res.status(400).json({ message: 'Incorrect username or password. Please try again!' });
-      return;
-    }
-
-    req.session.save(() => {
-        eq.session.userId = dbUserData.id;
-        req.session.username = dbUserData.username;
-        req.session.loggedIn = true;
-
-      res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
-    });
-  } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 
 // Logout
 router.post('/logout', async (req, res) => {
-    try {
-        if (req.session.loggedIn) {
-            const dbUserData = await req.session.destroy(() => {
-                res.status(204).end();
-            });
-        } else {
-            res.status(404).end();
-        }
-    } catch {
-        res.status(400).end();
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+          res.status(204).end();
+        });
+    } else {
+        res.status(404).end();
     }
+});
+
+router.get('/user', (req, res) => {
+  if (req.session.loggedIn) {
+    res.status(200).json({ user: req.session.user.id });
+  } else {
+    res.status(404).end();
+  }
 });
 
 module.exports = router;

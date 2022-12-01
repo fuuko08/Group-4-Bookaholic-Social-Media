@@ -18,12 +18,10 @@ class Post extends Model {}
             },
             image: {
                 type: DataTypes.STRING,
-                allowNull: false,
-                validate: { notEmpty: true }
+                defaultValue: 'https://bulma.io/images/placeholders/128x128.png',
             },
             like: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
             },
             userId: {
                 type: DataTypes.INTEGER,
