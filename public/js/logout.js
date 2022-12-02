@@ -1,5 +1,6 @@
+// this is logout button
 const logoutHandler = async () => {
-    const response = await fetch ('/api/user/signout', {
+    const response = await fetch ('/api/user/logout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     });
