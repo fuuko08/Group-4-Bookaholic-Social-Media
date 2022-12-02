@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
 		integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
 		crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel='stylesheet' href='/css/reset.css' />
     <link rel="stylesheet" href="/css/style.css"/> 
 </head>
@@ -36,6 +37,7 @@
         <a class="nav-item nav-link" href="/userpage">Profile</a>
             {{#if loggedIn}}
         <a class="nav-item nav-link" href="/logout">Sign Out</a>
+        <a class="nav-item nav-link modal-trigger upload"><i class="fa fa-plus"></i>Add Post</a>
             {{else}}
         <a class="nav-item nav-link" href="/login">Login</a>
         <a class="nav-item nav-link" href="/login">Signup</a>
@@ -61,8 +63,8 @@
       referrerpolicy='no-referrer'
     ></script>  
 
-    <footer>
-        &copy; Thanks for being part of Bookaholic! See you again soon!
+    <footer class="text-center">
+        &copy; Thanks for being part of Bookaholic!
     </footer>
 
 </body>
