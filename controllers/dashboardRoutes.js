@@ -76,6 +76,7 @@ router.get('/user/:id', withAuth, async (req, res) => {
             postArr,
             likeNum,
             commentNum,
+            postNum,
             loggedIn: req.session.loggedIn,
             loggedOut: !req.session.loggedIn,
             username: req.session.username, 

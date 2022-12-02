@@ -1,0 +1,35 @@
+<div class="comment-container comments">
+    
+    {{#each comments}}
+     <div class="is-flex mb-4" style="max-height: 100px">
+        <p> 
+            <a href="/{{user.id}}" class="">{{user.username}}</a>
+            {{comment.comment}}
+        </p>   
+     </div>
+
+        {{#if signedIn}}
+            <button class="btn btn-secondary" id="del-comment-btn">Delete Comment</button>       
+        {{/if}}
+    {{/each}} 
+
+    <div class="level-left">
+        <span class="card-header-title level-item" aria-label="heart emoji">
+            {{#if like}}
+            <strong>
+                <i class="fas fa-heart"></i>
+                <span data-value={{likes.length}}>{{likes.length}} likes</span>
+            </strong>
+            {{/if}}
+        </span>
+    </div>
+
+    <form class="comment-form p-3">
+        <div class="control">
+            <textarea class="form-input" placeholder="Write your comment" id="comment-text"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" id="commentBtn" value="{{id}}">Submit Comment</button>
+    </form>
+                 
+</div>
+<script src="/js/comment.js"></script>

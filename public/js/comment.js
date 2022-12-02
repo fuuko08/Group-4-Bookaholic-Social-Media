@@ -1,7 +1,7 @@
 //this is the comment form
 const postId = document.querySelector('input[name="post-id"]').value;
 
-const commentFormHandler = async (event) => {
+const commentHandler = async (event) => {
     event.preventDefault();
     const content = document.querySelector('textarea[name="comment-body"]').value;
     console.log(content);
@@ -11,18 +11,20 @@ const commentFormHandler = async (event) => {
             method: 'POST',
             body: JSON.stringify({
                 postId,
-                content,
+                comment,
             }),
             headers: {
                 'Content-Type': 'application/json'
             }
         });
         if (response.ok) {
-            document.location.reload();
+            document.location.replace(`/posts/${postId}?`);
         } else {
             alert(response.statusText);
         }
     };
 } 
 
-document.querySelector('#new-comment').addEventListener('submit', commentFormHandler);
+//delete comment button
+
+document.querySelector('#new-comment').addEventListener('submit', commentHandler);

@@ -1,15 +1,13 @@
 const helpers = {
-  format_time: (date) => {
-    return Intl.DateTimeFormat('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    }).format(new Date(date));
+  formatDate: (date) => {
+    return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${new Date(
+      date
+    ).getFullYear()}`;
   },
 
-    urlCompiler: function (str, query) {
-      return (recompiled =
-        str.split(/upload/)[0] + `upload/${query}` + str.split(/upload/)[1]);
+  urlCompiler: function (str, query) {
+    return (recompiled =
+      str.split(/upload/)[0] + `upload/${query}` + str.split(/upload/)[1]);
     },
   };
 

@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card-header flex-row justify-space-between"></div>
+        <a class="dropdown" id="post-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="./images/menu.png" width="18">
+        </a>   
+
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#">Delete Post</a>
+            <a class="dropdown-item" href="#">Edit Post</a>
+        </div>  
+
+        <h2><a href="/post/{{post.id}}"></a></h2>    
+    
+        <div class="col-3">posted by {{post.user.username}} on {{formatDate created_at}}</div>
+    </div>
+    
+    <div class="card-body">
+        <p>{{post.content}}</p>
+        <div class="column">    
+            {{> imageCard }}
+        </div>
+        <div class="column">
+            {{> commentCard}}
+        </div>
+    </div>
+</div> 
+
+<script src="/js/comment.js"></script>
