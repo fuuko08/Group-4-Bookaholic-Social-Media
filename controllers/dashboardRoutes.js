@@ -89,7 +89,7 @@ router.get('/user/:id', withAuth, async (req, res) => {
 
 // Click on the "New Post" button
 router.get('/new', (req, res) => {
-    res.render('newpost', {
+    res.render('uploadmodal', {
         username: req.session.username,
     });
 });

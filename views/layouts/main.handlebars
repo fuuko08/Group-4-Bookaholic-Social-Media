@@ -23,7 +23,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-sm navbar-light bg-custom" style="background-color: white;">
     <a class="navbar-brand" href="#">
-      <img src="./assets/bookstack2.png" width="32" height="32" class="d-inline-block align-top my-color" alt="Stack of Books">
+      <img src="/assets/bookstack2.png" width="32" height="32" class="d-inline-block align-top my-color" alt="Stack of Books">
       Bookaholics
     </a>
 		
@@ -36,8 +36,7 @@
         <a class="nav-item nav-link" href="/">Home</a>
         <a class="nav-item nav-link" href="/userpage">Profile</a>
             {{#if loggedIn}}
-        <a class="nav-item nav-link" href="/logout">Sign Out</a>
-        <a class="nav-item nav-link modal-trigger upload"><i class="fa fa-plus"></i>Add Post</a>
+        <a class="nav-item nav-link" id="logout-btn">Sign Out</a>
             {{else}}
         <a class="nav-item nav-link" href="/login">Login</a>
         <a class="nav-item nav-link" href="/login">Signup</a>
@@ -47,14 +46,19 @@
     </nav>
 
     <!-- Header -->
-    <header class="hero">
+    <header class="hero text-center">
         <h1 class="app-title"><a href="/">Welcome to Bookaholic</a></h1>
    </header>
    
     <!-- Body -->
-    <main>
+    <main>    
+
     {{{body}}}
+
+    <br/>
     </main>
+
+
 
     <script
       src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
@@ -62,6 +66,7 @@
       crossorigin='anonymous'
       referrerpolicy='no-referrer'
     ></script>  
+
 
     <footer class="text-center">
         &copy; Thanks for being part of Bookaholic!
@@ -71,4 +76,6 @@
 </html>
 {{#if loggedIn}}
 <script src="/js/logout.js"></script>
+<script src="/js/newpost.js"></script>
+<script src="/js/uploadmodal.js"></script>
 {{/if}}

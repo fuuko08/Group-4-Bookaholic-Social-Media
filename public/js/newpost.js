@@ -1,4 +1,4 @@
-const createBtn = document.querySelector('.create-btn');
+const createBtn = document.querySelector('.btn-post');
 
 function readFile() {
     if (this.files && this.files[0]) {
@@ -34,7 +34,7 @@ const fileHandler = (event) => {
 const uploadContent = async (event) => {
     event.preventDefault();
 
-    const content = document.querySelector('input[name="content"]').value;
+    const content = document.querySelector('textarea[name="post-content"]').value;
 
     const response = await fetch(`api/post`, {
         method: 'POST',
@@ -48,7 +48,7 @@ const uploadContent = async (event) => {
 
 const uploadImage = async (base64EncodedImage) => {
     try {
-        await fetch('api/posts/upload', {
+        await fetch('api/post/upload', {
             method: 'POST',
             body: JSON.stringify({ data: base64EncodedImage }),
             headers: { 'Content-Type': 'application/json' },
@@ -58,5 +58,5 @@ const uploadImage = async (base64EncodedImage) => {
     }
 };
 
-document.getElementById('dropdown').addEventListener('change', readFile);
+document.getElementById('inp').addEventListener('change', readFile);
 createBtn.addEventListener('click', fileHandler);

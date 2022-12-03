@@ -25,11 +25,10 @@ router.get('/', async (req, res) => {
                     model: Like,
                 }
             ],
-            order: [['updateAt', 'DESC']],
+            order: [['created_at', 'DESC']],
         });
 
         const posts = dbPostData.map((post) => post.get({ plain: true }));
-
         res.render('homepage', 
             { posts, 
             loggedIn: req.session.loggedIn,
