@@ -10,11 +10,11 @@ router.post('/login', async (req, res) => {
     try {
         const dbUserData = await User.findOne({
             raw: true,
-            where: { username: req.body.name },
+            where: { username: req.body.username },
         });
         
         if (!dbUserData) {
-            res.status(404).json({ message: "Failed to login!" });
+            res.status(404).json({ message: `User id ${req.params.id} is not valid.` });
             return;
         }
         const validPassword = await bcrypt.compare(
@@ -22,7 +22,7 @@ router.post('/login', async (req, res) => {
             dbUserData.password
           );
           if (!validPassword) {
-            res.status(400).json({ message: "Failed to login!" });
+            res.status(400).json({ message: "Incorrect Password" });
             return;
           }
           req.session.save(() => {
@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
 });
 
 // CREATE new user
-router.post('/signup', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const dbUserData = await User.create({
         username: req.body.username,

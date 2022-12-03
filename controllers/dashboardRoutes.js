@@ -4,7 +4,7 @@ const withAuth = require('../utils/auth');
 const sequelize = require('../config/connection');
 
 // Show all posts on dashboard
-router.get('/dashboard', withAuth, async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
     try {
         const dbPostData = await Post.findAll({
             where: { userId: req.session.userId, },
