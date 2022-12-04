@@ -18,7 +18,7 @@ router.post('/', withAuth, async (req, res) => {
 }); 
 
 // Upload post
-router.post('/upload', async (req, res) => {
+router.post('/upload', withAuth, async (req, res) => {
     try {
         const fileStr = req.body.file;        
         const postContent = req.body.content;

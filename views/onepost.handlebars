@@ -1,32 +1,44 @@
 <div class="bg-white border mt-2">
     <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">    
-        <div class="d-flex flex-column flex-wrap ml-2"><span class="font-weight-bold">{{user.username}}</span></div>
+        <div class="d-flex flex-column flex-wrap ml-2">
+            <button class="btn btn-danger" id="del-post-btn">Delete Post</button>
+            <button class="btn btn-secondary" id="edit-post-btn">Edit Post</button>
+        </div>
         
-        <a class="dropdown" id="post-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="./images/menu.png" width="18">
-        </a>   
+        <div class="col-3">posted by {{post.user.username}} on {{formatDate post.created_at}}</div>
 
-        <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="/editpost">Delete Post</a>
-            <a class="dropdown-item" href="/editpost">Edit Post</a>
-        </div>  
-
-        <h2><a href="/post/{{post.id}}"></a></h2>    
-    
-        <div class="col-3">posted by {{post.user.username}} on {{formatDate created_at}}</div>
+        {{!-- <h2><a href="/post/{{post.id}}"></a></h2>     --}}
     </div>
+
+    <input type="hidden" name="post-id" value="{{post.id}}"/>
     
     <div class="card-body">
-        <p>{{post.content}}</p>
+        <p id="post-content">{{post.content}}</p>
         <div class="column">    
-            {{> imageCard }}
+            <img src="{{post.image}}" alt="{{post.content}}" />
         </div>
-        <div class="column">
-            {{> commentCard}}
+
+        <div class="level-left card" id='{{id}}' >
+            <span class="card-header-title level-item" aria-label="heart emoji">
+                {{#if post.likes}}
+                <strong id="like-post" postId="{{id}}" class="like-post">
+                    <i class="fas fa-heart"></i>
+                    <span class="likes-counter" data-value={{post.likes.length}}>{{post.likes.length}} likes</span>
+                </strong>
+                {{else}}
+                <strong id='like-post' postId={{id}} class='like-post'><i class='far fa-heart'></i>
+                <span class='likes-counter' data-value={{post.likes.length}}></span>{{post.likes.length}} likes</span>
+                 </strong>
+                {{/if}}
+            </span>    
+            
+            <button class="btn btn-primary" id="like-btn"><i class="fa fa-thumbs-up"></i></button>
+        </div>
+
+        <div class="">
+            {{> commentCard post.comments}}
         </div>
     </div>
 </div> 
 
-<script src="/js/comment.js"></script>
-<script src="/js/likepost.js"></script>
-<script src="/js/uploadmodal.js"></script>
+<script src="/js/deletepost.js"></script>
