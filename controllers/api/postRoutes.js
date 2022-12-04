@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require('../../utils/cloudinary');
 const { Post } = require('../../models');
 const withAuth = require('../../utils/auth'); 
 const urlCompiler = require('../../utils/helpers');
@@ -18,19 +18,24 @@ router.post('/', withAuth, async (req, res) => {
 }); 
 
 // Upload post
-router.post('/upload', withAuth, async (req, res) => {
+router.post('/upload', async (req, res) => {
     try {
-        const fileStr = req.body.data;
+        const fileStr = req.body.file;        
+        const postContent = req.body.content;
         const uploadResponse = await cloudinary.uploader.upload(fileStr);
-        uploadResponse.url = urlCompiler(uploadResponse.url, 'w_1169,h_780,c_fill');
-
-        const newPost = await Post.create({
-            image: uploadResponse.url,
-            userId: req.session.userId,
+        
+        const newPost = await Post.create({        
+            image: uploadResponse.secure_url,
+            userId: req.session.userId,            
+            content: postContent
+            
         });
-        res.json({ newPost, success: true });
+
+        res.json({ newPost, success: true, message: "missing upload" });
     } catch (err) {
-        res.status(500).send(err);
+        console.log(err);
+        console.log("upload file: " + req.body.file);
+        res.status(500).json(err);
     }
 });
 

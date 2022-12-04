@@ -1,11 +1,13 @@
 <!-- Used in homepage and userpage -->
 
 <p class="card-text">{{post.content}}</p>
-    <a href='/posts/{{id}}' class=''>
-        <img src={{post.image}} alt='{{post.content}}' />
+    <a href='/posts/{{post.id}}' class={{post.content}}>
+        <img src='{{post.image}}' alt='{{post.content}}' />
         <div class='caption'>
             <h3> <i class='fa fa-heart'></i><span> {{likes.length}}</span></h3>
             <h3> <i class='fa fa-comment'></i><span> {{comments.length}}</span></h3>
         </div>
     </a>
 <h4 class="card-subtitle mb-2 text-muted col-3">posted by {{user.username}} on {{formatDate created_at}}</h4>
+
+this is post card

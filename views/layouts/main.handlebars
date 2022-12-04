@@ -22,7 +22,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-sm navbar-light bg-custom" style="background-color: white;">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
       <img src="/assets/bookstack2.png" width="32" height="32" class="d-inline-block align-top my-color" alt="Stack of Books">
       Bookaholics
     </a>
@@ -33,13 +33,13 @@
     
     <div class="collapse navbar-collapse">
       <div class="navbar-nav ml-auto">
-        <a class="nav-item nav-link" href="/">Home</a>
-        <a class="nav-item nav-link" href="/userpage">Profile</a>
+        <a class="nav-item nav-link" href="/"><span class='icon'><i class='fa fa-home'></i></span>Home</a>        
             {{#if loggedIn}}
+        <a class="nav-item nav-link" href="/userpage"><span class='icon'><i class='fa fa-book'></i></span>Profile</a>        
         <a class="nav-item nav-link" id="logout-btn">Sign Out</a>
             {{else}}
-        <a class="nav-item nav-link" href="/login">Login</a>
-        <a class="nav-item nav-link" href="/login">Signup</a>
+        <a class="nav-item nav-link" href="/login"><span class='icon'><i class='fa fa-user'></i></span>Login</a>
+        <a class="nav-item nav-link" href="/signup"><span class='icon'><i class='fa fa-plus'></i></span>Signup</a>
             {{/if}}
       </div>
     </div>
@@ -47,7 +47,7 @@
 
     <!-- Header -->
     <header class="hero text-center">
-        <h1 class="app-title"><a href="/">Welcome to Bookaholic</a></h1>
+        <h1 class="title">Welcome to Bookaholic</h1>
    </header>
    
     <!-- Body -->
@@ -76,6 +76,6 @@
 </html>
 {{#if loggedIn}}
 <script src="/js/logout.js"></script>
-<script src="/js/newpost.js"></script>
+{{!-- <script src="/js/newpost.js"></script> --}}
 <script src="/js/uploadmodal.js"></script>
 {{/if}}
