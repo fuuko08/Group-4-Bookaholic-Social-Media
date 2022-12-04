@@ -82,6 +82,7 @@ router.get('/post/:id', async (req, res) => {
                 loggedIn: req.session.loggedIn,
                 loggedOut: !req.session.loggedIn,
                 username: req.session.username,
+                userId: req.session.userId,
                 onepost: true,
             });
         } else {            

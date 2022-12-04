@@ -6,20 +6,15 @@ const likeHandler = async (event) => {
 
     if (id) {
         try {            
-            const response = await fetch('http://localhost:3001/api/like/13', {
+            const response = await fetch(`/api/like/${id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
             }).then(
                 (res) => {
                     return res.json();
                 }).then((jsonRes) => {
-                    console.log("my parse JSON: " + jsonRes.like);
                     const element = document.getElementById('like-post');
                     const likes = +document.querySelector('.likes-counter').getAttribute('data-value');
-
-                    console.log("how many: " + likes);
-                    console.log("Like value: " + jsonRes.like);
-                    console.log("message: "+jsonRes.message);
 
                     if (jsonRes.like) {
 

@@ -17,7 +17,6 @@
             <div class="col-3">posted by {{post.user.username}} on {{formatDate post.created_at}}</div>
         </div>
 
-<input type="hidden" id="likecount" value="{{post.likes.length}}"/>
         <div class="level-left card" id='{{id}}' >
             <span class="card-header-title level-item" aria-label="heart emoji">
                 {{#if post.likes}}

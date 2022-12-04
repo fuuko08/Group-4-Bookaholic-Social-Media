@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const cloudinary = require('../../utils/cloudinary');
-const { Post } = require('../../models');
+const { Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth'); 
 const urlCompiler = require('../../utils/helpers');
 
@@ -71,7 +71,12 @@ router.put('/:id', withAuth, async (req,res) =>{
 
 // delete post
 router.delete('/:id', withAuth, async (req,res) => {
+    console.log("TESTESTTEST");
     try{
+        const commentData = await Comment.destroy({
+            where: { postId: req.params.id },
+        });
+        
         const postData = await Post.destroy({
             where: { id: req.params.id, },
             });
@@ -81,6 +86,7 @@ router.delete('/:id', withAuth, async (req,res) => {
         }
             res.status(200).json(postData);
         } catch(err) {
+            console.log(err);
             res.status(500).json(err) 
         }
 });

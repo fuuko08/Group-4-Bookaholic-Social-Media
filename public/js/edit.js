@@ -1,5 +1,5 @@
 const postId = document.querySelector('input[name="post-id"]').value;
-const createBtn = document.querySelector('.btn-post');
+const saveBtn = document.querySelector('.btn-post');
 const imgTag = document.getElementById('img');
 const inpTag=document.getElementById('inp');
 
@@ -11,25 +11,6 @@ const fileRead = async () => {
             console.log('upload image: ' + fileRead.result);
             imgTag.src = event.target.result;
         });
-
-        
-
-        // var uploadReader = new FileReader();
-        // uploadReader.readAsDataURL(inpTag.files[0]);
-        // console.log(inpTag.files[0]);
-        // uploadReader.onloadend = async () => {
-        //     const response = await fetch(`http://localhost:3001/api/post/uploadpic`, {
-        //         method: 'POST',
-        //         body: JSON.stringify({ file: uploadReader.result}),
-        //         headers: { 'Content-Type': 'application/json' },
-        //     });
-
-        //     if (response.ok) {                
-        //         imgTag.src=response.newImageUrl;
-        //     }
-        // };
-
-        
     }
 }
 
@@ -37,7 +18,7 @@ const fileHandler = async (event) => {
     event.preventDefault();
 
     // create loading to freeze the screen
-    const loading = createBtn.classList.add('is-loading');
+    const loading = saveBtn.classList.add('is-loading');
 
     // query data in 2 elements (image, textarea)    
     const content = document.querySelector('textarea[name="post-content"]').value;
@@ -49,14 +30,16 @@ const fileHandler = async (event) => {
 
 const updatePost = async (imgUrl, content) => {
     try {
-        console.log('this is my upload post: ' + imgUrl);
+        const postId = document.querySelector('input[name="post-id"]').value;
         const response = await fetch(`http://localhost:3001/api/post/${postId}`, {
             method: 'PUT',
-            body: JSON.stringify({ image: imgUrl, content: content}),
+            body: JSON.stringify({ image: imgUrl, content: content, postId: postId, }),
             headers: { 'Content-Type': 'application/json' },
         });
 
-        if (!response.ok) {
+        if (response.ok) {
+            document.location.replace(`http://localhost:3001/post/${postId}`);
+        } else {
             alert(response.statusText);
         };
     } catch (err) {
@@ -65,4 +48,4 @@ const updatePost = async (imgUrl, content) => {
 };
 
 inpTag.addEventListener('change', fileRead);
-createBtn.addEventListener('click', fileHandler);
+saveBtn.addEventListener('click', fileHandler);
