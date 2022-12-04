@@ -1,12 +1,24 @@
 const likeBtn = document.querySelector('#like-btn');
-
+const id = document.querySelector('input[name="post-id"]').value;
 const likeHandler = async (event) => {
     event.preventDefault();
 
-    const id = document.querySelector('.card').id;
     if (id) {
-        try {
-            const response = await fetch(`/api/like/:${id}`, 'POST');
+        try {            
+            const response = await fetch(`/api/like/${id}`, {
+                method: 'POST',
+                body: JSON.stringify({                                   
+                    postId: id,
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (response.ok) {
+                //document.location.replace(`/post/${id}`);
+            } else {
+                alert(response.statusText);
+            }
       
             const element = document.getElementById('like-post');
             const likes = document.querySelector('.likes-counter').getAttribute('data-value');

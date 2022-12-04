@@ -1,4 +1,5 @@
 const postId = document.querySelector('input[name="post-id"]').value;
+const delButton = document.querySelector('#del-post-btn');
 
 const deleteHandler = async () => {
     await fetch(`/api/post/${postId}`, {
@@ -7,4 +8,8 @@ const deleteHandler = async () => {
     document.location.replace('/');
 };
 
-document.querySelector('#del-post-btn').addEventListener('click', deleteHandler);
+if(delButton!=null){
+    delButton.addEventListener('click', deleteHandler);
+}
+
+

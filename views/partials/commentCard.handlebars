@@ -1,9 +1,9 @@
 {{#each this}}
     <div class="is-flex mb-4" style="max-height: 100px">       
         <div class="control level-left">
-              <strong>{{user.username}}</strong>
-              <br>
-              <p>{{comment}}</p>
+              <strong>{{user.username}} </strong> 
+              <br/>
+              <span> {{comment}}</span>
         </div>  
 
       {{#if loggedIn}}
@@ -15,17 +15,12 @@
     </div>
 {{/each}}
 
-    <form class="comment-form p-5">
-        <div class="control">
-            <textarea class="form-input" placeholder="Write your comment" id="comment-text"></textarea>
-        </div>
-        <button class="btn btn-primary" type="submit" id="commentBtn" value="{{id}}">Submit</button>
-    </form>
+    
 
     </div>             
   </div>
  
   
-<script src="/js/comment.js"></script>
+
 <script src="/js/deletecomment.js"></script>
 <script src="/js/likepost.js"></script>

@@ -33,7 +33,8 @@ router.get('/', async (req, res) => {
             { posts, 
             loggedIn: req.session.loggedIn,
             loggedOut: !req.session.loggedIn,
-            username: req.session.username,                    
+            username: req.session.username,        
+            userId: req.session.userId            
             }); //double check                                        
     } catch (err) {
         res.status(500).json(err)

@@ -1,21 +1,20 @@
 <div class="bg-white border mt-2">
     <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">    
-        <div class="d-flex flex-column flex-wrap ml-2">
-            <button class="btn btn-danger" id="del-post-btn">Delete Post</button>
-            <button class="btn btn-secondary" id="edit-post-btn">Edit Post</button>
+        {{#if loggedIn}}
+        <div class="d-flex flex-column flex-wrap ml-2">            
+            <button class="btn btn-danger" id="del-post-btn">Delete Post</button>            
+            <a class="btn btn-secondary" href="/dashboard/edit/{{post.id}}"><span class="icon"><i class="fa fa-pen"></i></span>Edit Post</a>
         </div>
-        
-        <div class="col-3">posted by {{post.user.username}} on {{formatDate post.created_at}}</div>
-
-        {{!-- <h2><a href="/post/{{post.id}}"></a></h2>     --}}
+        {{/if}}
     </div>
 
     <input type="hidden" name="post-id" value="{{post.id}}"/>
     
-    <div class="card-body">
+    <div class="card-body">        
         <p id="post-content">{{post.content}}</p>
         <div class="column">    
             <img src="{{post.image}}" alt="{{post.content}}" />
+            <div class="col-3">posted by {{post.user.username}} on {{formatDate post.created_at}}</div>
         </div>
 
         <div class="level-left card" id='{{id}}' >
@@ -27,7 +26,7 @@
                 </strong>
                 {{else}}
                 <strong id='like-post' postId={{id}} class='like-post'><i class='far fa-heart'></i>
-                <span class='likes-counter' data-value={{post.likes.length}}></span>{{post.likes.length}} likes</span>
+                <span class='likes-counter' data-value={{post.likes.length}}></span>{{post.likes.length}} likes</span>                
                  </strong>
                 {{/if}}
             </span>    
@@ -38,7 +37,18 @@
         <div class="">
             {{> commentCard post.comments}}
         </div>
+
+        {{#if loggedIn}}
+        <form class="comment-form p-5">
+        <div class="control">
+            <textarea class="form-input" placeholder="Write your comment" id="comment-text"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" id="commentBtn" data-id={{post.id}}>Submit</button>
+        {{/if}}
+        
+    </form>
     </div>
 </div> 
 
 <script src="/js/deletepost.js"></script>
+<script src="/js/comment.js"></script>

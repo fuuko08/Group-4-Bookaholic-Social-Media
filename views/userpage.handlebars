@@ -1,6 +1,6 @@
 <div class="card">
     <div class="ms-3 text-dark" style="margin-top: 77px; margin-left: 17px">
-        <h4>{{user.username}}</h4>
+        <h4>{{username}}</h4>
     </div>
 
     <div class="p-4 text-black" style="background-color: white; height:95px;">
@@ -18,9 +18,13 @@
 
     <div class="p-4 text-black" style="background-color: white; height:95px;">
         <div class="d-flex justify-content-end text-center py-1">
-        {{#each postArr}}
-            {{> postCard }}
+            {{#if postArr.length}}
+            {{#each postArr}}
+            {{> postcard }}            
         {{/each}}
+            {{/if}}
+        
         </div>
     </div>
 </div>
+

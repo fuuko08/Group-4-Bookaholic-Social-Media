@@ -1,3 +1,5 @@
+const deleteBtn = document.querySelector('#delComBtn');
+
 //delete comment button
 const deleteComment = async (event) => {
     event.preventDefault();
@@ -19,5 +21,7 @@ const deleteComment = async (event) => {
         alert (response.statusText);
     }
 }
- 
-document.querySelector('#delComBtn').addEventListener('click', deleteComment);
+
+if(deleteBtn!=null){
+    deleteBtn.addEventListener('click', deleteComment);
+}

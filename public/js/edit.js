@@ -1,24 +1,68 @@
 const postId = document.querySelector('input[name="post-id"]').value;
+const createBtn = document.querySelector('.btn-post');
+const imgTag = document.getElementById('img');
+const inpTag=document.getElementById('inp');
 
-// this is the edit form
-const editFormHandler = async (event) => {
-    event.preventDefault();
-    
-    const content = document.querySelector('#post-content').value.trim();
+const fileRead = async () => {    
+    if (inpTag.files && inpTag.files[0]) {
+        
+        var fileRead = new FileReader();
+        fileRead.addEventListener('load', function(event) {            
+            console.log('upload image: ' + fileRead.result);
+            imgTag.src = event.target.result;
+        });
 
-    const response = await fetch(`/api/post/${postId}`, {
-        method: 'PUT',
-        body: JSON.stringify({
-            content,
-        }),
-        headers: {'Content-Type': 'application/json'}
-    });
-    if (response.ok) {
-        document.location.replace('/');
-    } else {
-        alert("Something wrong!");
+        
+
+        // var uploadReader = new FileReader();
+        // uploadReader.readAsDataURL(inpTag.files[0]);
+        // console.log(inpTag.files[0]);
+        // uploadReader.onloadend = async () => {
+        //     const response = await fetch(`http://localhost:3001/api/post/uploadpic`, {
+        //         method: 'POST',
+        //         body: JSON.stringify({ file: uploadReader.result}),
+        //         headers: { 'Content-Type': 'application/json' },
+        //     });
+
+        //     if (response.ok) {                
+        //         imgTag.src=response.newImageUrl;
+        //     }
+        // };
+
+        
     }
-    document.location.replace('/');
+}
+
+const fileHandler = async (event) => {
+    event.preventDefault();
+
+    // create loading to freeze the screen
+    const loading = createBtn.classList.add('is-loading');
+
+    // query data in 2 elements (image, textarea)    
+    const content = document.querySelector('textarea[name="post-content"]').value;
+
+    if(imgTag.src!=null){
+        await updatePost(imgTag.src, content);
+    }
 };
 
-document.querySelector('.edit-form').addEventListener('submit', editFormHandler);
+const updatePost = async (imgUrl, content) => {
+    try {
+        console.log('this is my upload post: ' + imgUrl);
+        const response = await fetch(`http://localhost:3001/api/post/${postId}`, {
+            method: 'PUT',
+            body: JSON.stringify({ image: imgUrl, content: content}),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) {
+            alert(response.statusText);
+        };
+    } catch (err) {
+        console.log('Failed!', err);
+    }
+};
+
+inpTag.addEventListener('change', fileRead);
+createBtn.addEventListener('click', fileHandler);

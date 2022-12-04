@@ -33,7 +33,7 @@ router.get('/:id', withAuth, async (req, res) => {
 });
 
 // Create comments
-router.post("/", withAuth, async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         const commentData = await Comment.create({
             comment: req.body.comment,
