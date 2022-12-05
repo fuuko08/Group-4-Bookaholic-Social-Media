@@ -33,11 +33,12 @@ router.get('/', withAuth, async (req, res) => {
         const posts = dbPostData.map((post) => post.get({ plain: true }));
         posts.map((e) => (e.like = e.likes.filter((e) => e.userId === req.session.user.id).length > 0));
 
-        res.render('dashboard', {
+        res.render('homepage', {
             posts,
             loggedIn: req.session.loggedIn,
             loggedOut: !req.session.loggedIn,
             username: req.session.username, 
+            userId: req.session.user.id
         });
     } catch (err) {
         res.status(500).json(err);
@@ -53,7 +54,7 @@ router.get('/user/:id', withAuth, async (req, res) => {
                 {
                     model: Post,
                     order: [['updatedAt', 'DESC']],
-                    include: [{ model: Like }],
+                    include: [{ model: Like, User }],
                 },
                 {
                     model: Comment,
@@ -68,6 +69,8 @@ router.get('/user/:id', withAuth, async (req, res) => {
             likeNum += onepost.likes.length;           
         });
         const commentNum = userData.comments.length;
+
+        //res.status(200).json({ postArr });
 
         res.render('userpage', {
             userId: userData.id,
@@ -95,7 +98,7 @@ router.get('/new', (req, res) => {
 });
 
 // Click on the post to edit it
-router.get('/edit/:id', withAuth, async (req, res) => {
+router.get('/edit/:id', async (req, res) => {
     try {
         const dbPostData = await Post.findOne({
             where: { id: req.params.id, },
@@ -123,7 +126,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
                 username: req.session.username
             });
         } else {
-            res.status(404).json({ message: "This user has no post." });
+            res.status(404).json({ message: "Post not found." });
             return;
         }
     } catch (err) {

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const cloudinary = require('../../utils/cloudinary');
-const { Post } = require('../../models');
+const { Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth'); 
 const urlCompiler = require('../../utils/helpers');
 
@@ -17,8 +17,21 @@ router.post('/', withAuth, async (req, res) => {
     }    
 }); 
 
+router.post('/uploadpic', async (req, res) => {
+    try {
+        const fileStr = req.body.file;
+        const uploadResponse = await cloudinary.uploader.upload(fileStr);
+
+        res.status(200).json({newImageUrl: uploadResponse.secure_url});
+    } catch (err) {
+        console.log(err);
+        console.log("upload file: " + req.body.file);
+        res.status(500).json(err);
+    }
+});
+
 // Upload post
-router.post('/upload', async (req, res) => {
+router.post('/upload', withAuth, async (req, res) => {
     try {
         const fileStr = req.body.file;        
         const postContent = req.body.content;
@@ -42,7 +55,8 @@ router.post('/upload', async (req, res) => {
 // Edit post
 router.put('/:id', withAuth, async (req,res) =>{
     try {
-        const postData = await Post.update(req.body, {
+        console.log("RUNNING");
+        const postData = await Post.update({image: req.body.image, content: req.body.content}, {
                 where: { id: req.params.id, },    
         });
         if (!postData) { 
@@ -57,7 +71,12 @@ router.put('/:id', withAuth, async (req,res) =>{
 
 // delete post
 router.delete('/:id', withAuth, async (req,res) => {
+    console.log("TESTESTTEST");
     try{
+        const commentData = await Comment.destroy({
+            where: { postId: req.params.id },
+        });
+        
         const postData = await Post.destroy({
             where: { id: req.params.id, },
             });
@@ -67,6 +86,7 @@ router.delete('/:id', withAuth, async (req,res) => {
         }
             res.status(200).json(postData);
         } catch(err) {
+            console.log(err);
             res.status(500).json(err) 
         }
 });

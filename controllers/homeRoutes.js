@@ -33,7 +33,8 @@ router.get('/', async (req, res) => {
             { posts, 
             loggedIn: req.session.loggedIn,
             loggedOut: !req.session.loggedIn,
-            username: req.session.username,                    
+            username: req.session.username,        
+            userId: req.session.userId            
             }); //double check                                        
     } catch (err) {
         res.status(500).json(err)
@@ -67,25 +68,29 @@ router.get('/post/:id', async (req, res) => {
             ],
         });
         if (dbPostData) {
-            const posts = dbPostData.get({ plain: true });
-            posts.comments.map((e) => 
-                (e.loggedIn = req.session.loggedIn && e.userId === req.session.user.id)
+            const post = dbPostData.get({ plain: true });
+            post.comments.map((e) => 
+                (e.loggedIn = req.session.loggedIn && e.userId === req.session.userId)
             );
-            posts.like = posts.likes.filter((e) => e.userId === req.session.user.id).length > 0;
+            post.like = post.likes.filter((e) => e.userId === req.session.userId).length > 0;
+
+            //res.status(200).json(post);
 
             res.render('onepost', { 
-                posts, 
-                comments: posts.comments,
+                post, 
+                comments: post.comments,
                 loggedIn: req.session.loggedIn,
                 loggedOut: !req.session.loggedIn,
                 username: req.session.username,
+                userId: req.session.userId,
                 onepost: true,
             });
-        } else {
+        } else {            
             res.status(404).json({ message: "This user has no post." });
             return;
         }
     } catch (err) {
+        console.log("ISSUE " + err);
         res.status(500).json(err);
     }
 });

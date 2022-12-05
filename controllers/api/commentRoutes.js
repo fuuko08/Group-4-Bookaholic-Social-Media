@@ -3,7 +3,7 @@ const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth'); 
 
 // Get all the comments from all posts
-router.get('/', withAuth, async (req, res) => {
+router.get('/',  async (req, res) => {
     try {
         const commentData = await Comment.findAll({});
         if (commentData.length === 0) {
@@ -33,10 +33,11 @@ router.get('/:id', withAuth, async (req, res) => {
 });
 
 // Create comments
-router.post("/", withAuth, async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         const commentData = await Comment.create({
-            ...req.body, 
+            comment: req.body.comment,
+            postId: req.body.postId, 
             userId : req.session.userId, 
         });
         res.status(200).json({ commentData, success: true });
@@ -50,7 +51,7 @@ router.put('/:id', withAuth, async (req,res) =>{
     try {
         const commentData = await Comment.update(
         {
-            comment : req.body.comment,
+            comment: req.body.comment,
         },
         {
             where : {

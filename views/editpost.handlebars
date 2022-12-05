@@ -1,24 +1,25 @@
 <div class="bg-white border mt-2">
+    <h2 class="card-header">Edit Your Post</h2>
     <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">    
         <div class="d-flex flex-column flex-wrap ml-2"><span class="font-weight-bold">{{user.username}}</span></div>
-    
-        <h2 class="card-header">Edit Your Post</h2>
 
         <form class="card-body edit-form">
+            <input type="hidden" name="post-id" value="{{post.id}}"/>
 
             <div class="form-group column">
                 <label class="form-label">Content:</label>
                 <textarea class="form-textarea form-input" name="post-content">{{post.content}}</textarea>
             </div>
+            <div class="input-group px-3 col-md-3 card-body"></div>                  
+            <h3 class='title'>Upload an Image</h3>                  
+            <input id="inp" type="file" name="image" value="" class="form-input">   
+            <img id='img' src={{post.image}} class="image is-200x200" alt='uploadtest'/>  
+        </div>          
+ <button type="submit" class="btn btn-primary btn-post">Save</button>              
+    <button type="button" class="btn btn-secondary">Cancel</button>            
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Edit</button>
-            </div>
-
-            <div class="form-group">
-                <button type="button" class="btn btn-primary" id="delete-btn">Delete</button>
-            </div>
-
+            <input type="hidden" name="post-id" value="{{post.id}}"/>
+    
         </form>
     </div>
 </div>
