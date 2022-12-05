@@ -1,0 +1,28 @@
+<!-- Used inside the all post handlebars -->
+<div class="card">
+  <header class="card-header">
+    <h5 class="card-title">Create a Post</h5>                
+  </header>                              
+  <br>                
+  
+  <div class="input-group px-3 col-md-3 card-body"></div>                    
+    <label class="form-label">Content:</label>                  
+    <textarea class="form-textarea form-input" name="post-content" rows="4" placeholder="Type something..."></textarea>                  
+  </div>                  
+
+  <div class="input-group px-3 col-md-3 card-body"></div>                  
+    <h3 class='title'>Upload an Image</h3>                  
+    <input id="inp" type="file" name="image" value="" class="form-input">   
+    <img id='img' src='https://via.placeholder.com/200x200' class="image is-200x200" alt='uploadtest'/>  
+  </div>          
+      
+  <footer class="card-footer"></footer>              
+    <button type="submit" class="btn btn-primary btn-post">Post</button>              
+    <button type="button" class="btn btn-secondary">Cancel</button>                
+  </footer>              
+
+</div>                  
+
+<div class="feed-icon px-2"><i class="text-black-50"></i></div>
+
+<script src="/js/newpost.js"></script>

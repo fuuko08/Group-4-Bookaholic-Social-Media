@@ -1,0 +1,13 @@
+<!-- Used in homepage and userpage -->
+
+<p class="card-text">{{this.content}}</p>
+    <a href='/post/{{this.id}}' >
+        <img src="{{this.image}}" alt='{{this.content}}'/>
+        <div class='caption'>
+            <button class="btn btn-primary" id="like-btn"><i class="fa fa-thumbs-up">{{likes.length}}</i></button>            
+            <h3> <i class='fa fa-comment'></i><span> {{comments.length}}</span></h3>
+        </div>
+    </a>
+    <h4 class="card-subtitle mb-2 text-muted col-3">Updated on {{formatDate updatedAt}}</h4>
+
+<script src="/js/likepost.js"></script>
