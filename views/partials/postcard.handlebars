@@ -1,13 +1,15 @@
 <!-- Used in homepage and userpage -->
-
-<p class="card-text">{{this.content}}</p>
-    <a href='/post/{{this.id}}' >
-        <img src="{{this.image}}" alt='{{this.content}}'/>
-        <div class='caption'>
-            <button class="btn btn-primary" id="like-btn"><i class="fa fa-thumbs-up">{{likes.length}}</i></button>            
-            <h3> <i class='fa fa-comment'></i><span> {{comments.length}}</span></h3>
-        </div>
-    </a>
-    <h4 class="card-subtitle mb-2 text-muted col-3">Updated on {{formatDate updatedAt}}</h4>
-
+<div class="bg-white border mt-2 card" style="width: 75%; max-height: 300px">
+    <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">
+        <p class="card-text">{{this.content}}</p>
+            <a href='/post/{{this.id}}' >
+                <img style="max-height: 200px" src="{{this.image}}" alt='{{this.content}}'/>
+                <div class='caption'>
+                    <button class="btn btn-primary" id="like-btn"><i class="fa fa-thumbs-up">{{likes.length}}</i></button>            
+                    <h3> <i class='fa fa-comment'></i><span> {{comments.length}}</span></h3>
+                </div>
+            </a>
+        <h4 class="card-subtitle mb-2 text-muted col-3">Updated on {{formatDate updatedAt}}</h4>
+   </div> 
+</div>
 <script src="/js/likepost.js"></script>
