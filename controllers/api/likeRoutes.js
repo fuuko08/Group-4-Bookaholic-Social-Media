@@ -7,7 +7,6 @@ router.post('/:id',withAuth, async (req, res) => {
     try {        
 
         const userId = req.session.userId;
-        console.log("POST ID: " + req.params.id);
         const likeData = await Like.findOne({
             where: { userId: userId , postId: req.params.id}
         });

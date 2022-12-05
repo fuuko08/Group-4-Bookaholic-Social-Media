@@ -25,7 +25,6 @@ router.post('/uploadpic', async (req, res) => {
         res.status(200).json({newImageUrl: uploadResponse.secure_url});
     } catch (err) {
         console.log(err);
-        console.log("upload file: " + req.body.file);
         res.status(500).json(err);
     }
 });
@@ -47,7 +46,6 @@ router.post('/upload', withAuth, async (req, res) => {
         res.json({ newPost, success: true, message: "missing upload" });
     } catch (err) {
         console.log(err);
-        console.log("upload file: " + req.body.file);
         res.status(500).json(err);
     }
 });

@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
             loggedOut: !req.session.loggedIn,
             username: req.session.username,        
             userId: req.session.userId            
-            }); //double check                                        
+            });                                         
     } catch (err) {
         res.status(500).json(err)
     }
@@ -73,8 +73,6 @@ router.get('/post/:id', async (req, res) => {
                 (e.loggedIn = req.session.loggedIn && e.userId === req.session.userId)
             );
             post.like = post.likes.filter((e) => e.userId === req.session.userId).length > 0;
-
-            //res.status(200).json(post);
 
             res.render('onepost', { 
                 post, 
