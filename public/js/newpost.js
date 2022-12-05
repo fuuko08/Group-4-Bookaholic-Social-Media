@@ -1,29 +1,40 @@
-const createBtn = document.querySelector('.create-btn');
+const createBtn = document.querySelector('.btn-post');
 
 function readFile() {
     if (this.files && this.files[0]) {
         var fileRead = new FileReader();
-        fileRead.addEventListener('load', function(event) {
+        fileRead.addEventListener('load', function(event) {            
             document.getElementById('img').src = event.target.result;
         });
 
         fileRead.readAsDataURL(this.files[0]);
+        console.log("this is my read file: " + this.files[0]);
     }
 }
 
 const fileHandler = (event) => {
     event.preventDefault();
 
-    const loading = document.querySelector('.create-btn').classList.add('is-loading');
+    // create loading to freeze the screen
+    const loading = createBtn.classList.add('is-loading');
+
+    // query data in 2 elements (image, textarea)
     const notFile = document.querySelector('input[type=file]')['files'][0];
+    const content = document.querySelector('textarea[name="post-content"]').value;
+
+    // make sure it works
+    console.log ("first file" + notFile);
     if (!notFile) return;
 
+    // create File Reader to upload to Clodinary
     const reader = new FileReader();
     reader.readAsDataURL(notFile);
     reader.onloadend = async () => {
-        await uploadImage(reader.result);
-        await uploadContent();
-        loading;
+        console.log("start to Onloadend");
+
+        await createPost(reader.result, content);
+        //await uploadContent();
+        createBtn.classList.remove('is-loading');
         document.location.replace('/');
     };
     reader.onerror = () => {
@@ -32,11 +43,10 @@ const fileHandler = (event) => {
 };
 
 const uploadContent = async (event) => {
-    event.preventDefault();
 
-    const content = document.querySelector('input[name="content"]').value;
+    const content = document.querySelector('textarea[name="post-content"]').value;
 
-    const response = await fetch(`api/post`, {
+    const response = await fetch('http://localhost:3001/api/post', {
         method: 'POST',
         body: JSON.stringify({ content }),
         headers: { 'Content-Type': 'application/json' },
@@ -46,17 +56,22 @@ const uploadContent = async (event) => {
     };
 };
 
-const uploadImage = async (base64EncodedImage) => {
+const createPost = async (base64EncodedImage, content) => {
     try {
-        await fetch('api/posts/upload', {
+        console.log('this is my upload post: ' + base64EncodedImage);
+        const response = await fetch('http://localhost:3001/api/post/upload', {
             method: 'POST',
-            body: JSON.stringify({ data: base64EncodedImage }),
+            body: JSON.stringify({ file: base64EncodedImage, content: content}),
             headers: { 'Content-Type': 'application/json' },
         });
+
+        if (!response.ok) {
+            alert(response.statusText);
+        };
     } catch (err) {
         console.log('Failed!', err);
     }
 };
 
-document.getElementById('dropdown').addEventListener('change', readFile);
+document.getElementById('inp').addEventListener('change', readFile);
 createBtn.addEventListener('click', fileHandler);

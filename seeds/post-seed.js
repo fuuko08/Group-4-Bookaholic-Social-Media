@@ -4,6 +4,7 @@ const postData = [
     {
         "title": "Hello World!",
         "content": "Nice to meet you!",
+        "image": "./assets/stackofbook.png",
         "userId": 1,
     },
 ]

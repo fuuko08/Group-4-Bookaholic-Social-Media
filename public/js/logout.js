@@ -5,11 +5,11 @@ const logoutHandler = async () => {
         headers: { 'Content-Type': 'application/json' },
     });
     if (response.ok) {
-        document.location.replace('/');
+        document.location.replace('/login');
         alert ('You have logged out!')
     } else {
-        alert ('Something wrong!')
+        alert ('Failed to log out!')
     }
 };
 
-document.querySelector('#logout').addEventListener('click', logoutHandler);
+document.querySelector('#logout-btn').addEventListener('click', logoutHandler);

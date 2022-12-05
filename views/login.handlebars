@@ -8,17 +8,19 @@
       </div>
       <div class="col-lg-8">
         <div class="card-body py-5 px-md-5">
-          <form>
-            <!-- Email input -->
+          <form class="card-body login-form">   
+            <h5>Log In to Share Your Favorite Books</h5>
+            <br>  
+            <!-- Email (or Username) input -->
             <div class="form-outline mb-4">
-              <h5>Log In to Share Your Favorite Books</h5>
-              <br>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email">
+              <div class="form-group">
+                <input type="text" class="form-control" for="username" placeholder="Enter Username" id="username-login"/>
+              </div>
             </div>
             <!-- Password input -->
             <div class="form-outline mb-4">
               <div class="form-group">
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <input type="password" class="form-control" for="password" placeholder="Enter Password" id="password-login"/>
               </div>
             <!-- 2 column grid layout -->
             <div class="row mb-4">
@@ -26,7 +28,9 @@
               </div>
             </div>
             <!-- Log In Button -->
-            <button type="button" class="btn btn-primary btn-block mb-4">Log In</button>
+            <div class="form-outline mb-4">
+              <button type="submit" class="btn btn-primary btn-block mb-4">Log In</button>
+            </div>
           </form>
         </div>
       </div>
@@ -34,3 +38,4 @@
   </div>
 </section>
 <script src="js/login.js"></script>
+            

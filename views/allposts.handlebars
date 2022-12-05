@@ -1,0 +1,12 @@
+{{> uploadmodal }}
+<section>
+    <div class="container">
+        <div class="column">
+            {{#each posts as |post|}}
+                {{> postcard}}
+            {{/each}}
+        </div>
+    </div>
+</section>
+
+<script src="/js/uploadmodal.js"></script>

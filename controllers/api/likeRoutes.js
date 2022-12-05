@@ -1,39 +1,24 @@
 const router = require('express').Router();
-const  Like = require('../../models');
+const { Like } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-router.post("/", async (req, res) => {
+//Like or unLike a post
+router.post('/:id', withAuth, async (req, res) => {
     try {
-        const likeData = await Like.create({
-            id : req.body.id,
-            userId : req.body.userId,
-            like : req.body.like,
-            postId : req.body.postId
-        })
-        res.status(200).json(likeData);
-    }catch(err){
-        res.status(400).json(err);
-    }
-    
-});  
-
-router.put('/', async (req,res) =>{
-    try {
-        const likeData = await Comment.create(
-        {
-            id : req.body.id,
-            userId : req.body.userId,
-            comment : req.body.comment,
-            postId : req.body.postId
-        },
-        {
-            where : {
-                id: req.body.id,
-            }
+        const likeData = await Like.findOne({
+            where: { userId: req.session.userId, postId: req.params}
         });
-        res.status(200).json(likeData)
-    }catch (err) {
-        res.status(400).json(err)
-    }
 
-})
-module.exports = commentPost;
+        if (!likeData) {
+            await Like.create({ userId: req.session.userId, postId: req.params });
+            res.status(200).json({ like: true, message: `You liked the post ${postId}` });
+        } else {
+            await Like.destroy({ where: likeData.dataValues });
+            res.status(200).json({ like: false, message: `You unliked the post ${postId}` });
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+module.exports = router; 

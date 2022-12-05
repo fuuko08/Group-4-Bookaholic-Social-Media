@@ -1,94 +1,51 @@
 const router = require('express').Router();
-const { Post, User, Comment } = require('../../models');
-const withAuth = require('../../utils/auth'); //we need to utilize this middleware
+const cloudinary = require('../../utils/cloudinary');
+const { Post } = require('../../models');
+const withAuth = require('../../utils/auth'); 
+const urlCompiler = require('../../utils/helpers');
 
-// Get all posts
-router.get('/', async (req, res) => {
+// Create new post
+router.post('/', withAuth, async (req, res) => {
     try {
-        const postData = await Post.findAll ({
-            attributes: ['id', 'content', 'image', 'like', 'created_at'],
-            order: [['created_at', 'DESC']],
-            include: [
-                {
-                    model: Comment,
-                    attributes: ['id', 'comment', 'postId', 'userId', 'created_at'],
-                    include: {
-                        model: User,
-                        attributes: ['username'],
-                    },
-                },
-                {
-                    model: User,
-                    attributes: ['username'],
-                },
-            ],
+        const newPost = await Post.create({
+            ...req.body,
+            userId : req.session.userId, 
         });
-        res.status(200).json(postData.reverse());
-    } catch (err) {
-        res.status(400).json(err);
-    }
-});
-
-// Get 1 post
-router.get('/:id', async (req, res) => {
-    try {
-        const postData = await Post.findAll ({
-            where: { id: req.params.id },
-            attributes: ['id', 'like', 'content', 'image', 'created_at'],
-            order: [['created_at', 'DESC']],
-            include: [
-                {
-                    model: Comment,
-                    attributes: ['id', 'comment', 'postId', 'userId', 'created_at'],
-                    include: {
-                        model: User,
-                        attributes: ['username'],
-                    },
-                },
-                {
-                    model: User,
-                    attributes: ['username'],
-                },
-            ],
-        });
-        if (!postData) {
-            res.status(404).json({ message: `The id ${req.params.id} has no post.`});
-            return;
-        }
-        res.status(200).json(postData);
-    } catch (err) {
-        res.status(400).json(err);
-    }
-});
-
-// Create post
-router.post("/", withAuth, async (req, res) => {
-    try {
-        const postData = await Post.create({
-            ...req.body, //replace 
-            userId : req.session.userId, //syntax
-        })
-        res.status(200).json(postData);
+        res.status(200).json( {newPost, success: true });
     }catch(err){
-        res.status(400).json(err);
+        res.status(500).json(err);
     }    
 }); 
+
+// Upload post
+router.post('/upload', async (req, res) => {
+    try {
+        const fileStr = req.body.file;        
+        const postContent = req.body.content;
+        const uploadResponse = await cloudinary.uploader.upload(fileStr);
+        
+        const newPost = await Post.create({        
+            image: uploadResponse.secure_url,
+            userId: req.session.userId,            
+            content: postContent
+            
+        });
+
+        res.json({ newPost, success: true, message: "missing upload" });
+    } catch (err) {
+        console.log(err);
+        console.log("upload file: " + req.body.file);
+        res.status(500).json(err);
+    }
+});
 
 // Edit post
 router.put('/:id', withAuth, async (req,res) =>{
     try {
-        const postData = await Post.update(
-        {// only edit tile, content and image. userid and id stay the same
-            title : req.body.title,
-            content : req.body.content,
-            image : req.body.image,
-        }, 
-        {
-            where : {
-                id: req.params.id, //syntax
-            }
+        const postData = await Post.update(req.body, {
+                where: { id: req.params.id, },    
         });
-        if (!postData) { //check if there is any post to edit
+        if (!postData) { 
             res.status(404).json({ message: `The id ${req.params.id} has no post.` });
             return;
         }
@@ -99,10 +56,10 @@ router.put('/:id', withAuth, async (req,res) =>{
 });
 
 // delete post
-router.delete("/:id", withAuth, async (req,res) => {
+router.delete('/:id', withAuth, async (req,res) => {
     try{
-        const postData = await Post.destroy({ //syntax
-            where: { id: req.params.id, uesrId: req.session.userId },
+        const postData = await Post.destroy({
+            where: { id: req.params.id, },
             });
         if (!postData) {
             res.status(404).json({ message: `User ${req.session.userId} has no post to delete`});
@@ -110,8 +67,8 @@ router.delete("/:id", withAuth, async (req,res) => {
         }
             res.status(200).json(postData);
         } catch(err) {
-            res.status(500).json(err) //syntax
+            res.status(500).json(err) 
         }
 });
 
-module.exports = router; // export directly to router, you already called the route in index.js
+module.exports = router; 
