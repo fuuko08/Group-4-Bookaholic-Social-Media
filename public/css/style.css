@@ -1,5 +1,8 @@
 body{background-color:#eee}
 
+.footer {
+    height: 100px;
+}
 /* Navbar */
 .bg-custom {
     background-color: white;
