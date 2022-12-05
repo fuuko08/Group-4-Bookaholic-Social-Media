@@ -17,7 +17,7 @@ router.post('/', withAuth, async (req, res) => {
     }    
 }); 
 
-router.post('/uploadpic', async (req, res) => {
+router.post('/uploadpic',withAuth, async (req, res) => {
     try {
         const fileStr = req.body.file;
         const uploadResponse = await cloudinary.uploader.upload(fileStr);
@@ -69,7 +69,6 @@ router.put('/:id', withAuth, async (req,res) =>{
 
 // delete post
 router.delete('/:id', withAuth, async (req,res) => {
-    console.log("TESTESTTEST");
     try{
         const commentData = await Comment.destroy({
             where: { postId: req.params.id },
