@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="ms-3 text-dark" style="margin-top: 77px; margin-left: 17px">
+        <h2 class="title">Hello, {{username}}</h2>
+    </div>
+
+    <div class="p-4 text-black" style="background-color: white; height:95px;">
+        <div class="d-flex justify-content-end text-center py-1">
+            <div>
+                <p class="title"> You have: </p>
+            </div>
+            <div>
+                <p class="mb-1 h5">{{postNum}}</p>
+                <p class="small text-muted mb-0">Posts</p>
+            </div>
+            <div class="px-3">
+                <p class="mb-1 h5">{{likeNum}}</p>
+                <p class="small text-muted mb-0">Likes</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-4 text-black" style="background-color: white;">
+        <div class="column d-flex justify-content-end text-center py-1">
+            {{#if postArr.length}}
+            {{#each postArr}}
+            {{> postcard }}            
+        {{/each}}
+            {{/if}}
+        
+        </div>
+    </div>
+</div>
+

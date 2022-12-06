@@ -1,0 +1,26 @@
+{{#each this}}
+    <div class="is-flex mb-4" style="max-height: 100px">       
+        <div class="control level-left">
+              <strong>{{user.username}} </strong> 
+              <br/>
+              <span> {{comment}}</span>
+        </div>  
+
+      {{#if loggedIn}}
+        <div class="level-right">  
+          <button class="btn btn-secondary" type="button" data-id={{id}} id="delComBtn">X</button>
+        </div>  
+      {{/if}}
+
+    </div>
+{{/each}}
+
+    
+
+    </div>             
+  </div>
+ 
+  
+
+<script src="/js/deletecomment.js"></script>
+<script src="/js/likepost.js"></script>
