@@ -1,3 +1,4 @@
+<!-- Log In Background -->
 <section class=" text-center text-lg-start">
   <div class="card mb-3">
     <div class="row g-0 d-flex align-items-center">
@@ -7,35 +8,34 @@
       </div>
       <div class="col-lg-8">
         <div class="card-body py-5 px-md-5">
-
-          <form class="login-form">
-
+          <form class="card-body login-form">   
+            <h5>Log In to Share Your Favorite Books</h5>
+            <br>  
+            <!-- Email (or Username) input -->
             <div class="form-outline mb-4">
-              <h5>Log In to Share Your Favorite Books</h5>
+              <div class="form-group">
+                <input type="text" class="form-control" for="username" placeholder="Enter Username" id="username-login"/>
+              </div>
             </div>
-
+            <!-- Password input -->
             <div class="form-outline mb-4">
-                <label class="form-label" for="username">Username:</label>
-                <input type="text" class="form-input" id="username-login"/>
+              <div class="form-group">
+                <input type="password" class="form-control" for="password" placeholder="Enter Password" id="password-login"/>
+              </div>
+            <!-- 2 column grid layout -->
+            <div class="row mb-4">
+              <div class="col d-flex justify-content-center">
+              </div>
             </div>
-
+            <!-- Log In Button -->
             <div class="form-outline mb-4">
-                <label class="form-label" for="password">Password</label>
-                <input type="password" class="form-input" id="password-login"/>
-            </div>
-            
-            <div class="form-outline mb-4">
-                <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary btn-block mb-4">Log In</button>
             </div>
           </form>
-
-        <br>
-        <a href="/signup">Click here to sign up</a>
-          
         </div>
       </div>
     </div>
   </div>
 </section>
-
 <script src="js/login.js"></script>
+            
