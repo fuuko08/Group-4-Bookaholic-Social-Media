@@ -46,7 +46,7 @@ const uploadContent = async (event) => {
 
     const content = document.querySelector('textarea[name="post-content"]').value;
 
-    const response = await fetch('http://localhost:3001/api/post', {
+    const response = await fetch('/api/post', {
         method: 'POST',
         body: JSON.stringify({ content }),
         headers: { 'Content-Type': 'application/json' },
@@ -59,7 +59,7 @@ const uploadContent = async (event) => {
 const createPost = async (base64EncodedImage, content) => {
     try {
         console.log('this is my upload post: ' + base64EncodedImage);
-        const response = await fetch('http://localhost:3001/api/post/upload', {
+        const response = await fetch('/api/post/upload', {
             method: 'POST',
             body: JSON.stringify({ file: base64EncodedImage, content: content}),
             headers: { 'Content-Type': 'application/json' },
