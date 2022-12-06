@@ -62,6 +62,7 @@ router.post('/logout', withAuth, async (req, res) => {
             res.status(204).end();
         });
     } else {
+      console.log("err" + err);
         res.status(404).end();
     }
 } catch {
