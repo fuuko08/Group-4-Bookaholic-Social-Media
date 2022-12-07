@@ -31,14 +31,14 @@ const fileHandler = async (event) => {
 const updatePost = async (imgUrl, content) => {
     try {
         const postId = document.querySelector('input[name="post-id"]').value;
-        const response = await fetch(`http://localhost:3001/api/post/${postId}`, {
+        const response = await fetch(`/api/post/${postId}`, {
             method: 'PUT',
             body: JSON.stringify({ image: imgUrl, content: content, postId: postId, }),
             headers: { 'Content-Type': 'application/json' },
         });
 
         if (response.ok) {
-            document.location.replace(`http://localhost:3001/post/${postId}`);
+            document.location.replace(`/post/${postId}`);
         } else {
             alert(response.statusText);
         };

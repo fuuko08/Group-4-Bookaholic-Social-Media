@@ -47,9 +47,9 @@ Included is a package.json file with the required dependencies, as well as gitig
 
 ## Installation
 
-The code for this project can be found on GitHub at: https://github.com/fuuko08/Group-4-Bookaholic-Social-Media/tree/selinadev
+The code for this project can be found on GitHub at: https://github.com/fuuko08/Group-4-Bookaholic-Social-Media/
 
-The site is deployed at: 
+The site is deployed at: https://bookaholicbootcampselina.herokuapp.com/
 
 
 ## Usage
