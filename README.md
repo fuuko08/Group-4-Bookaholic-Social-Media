@@ -52,16 +52,29 @@ The code for this project can be found on GitHub at: https://github.com/fuuko08/
 The site is deployed at: https://bookaholicbootcampselina.herokuapp.com/
 
 
-## Usage
+## Dependencies
 
-The following image shows the application's homepage:
-
-![Homepage](./public/assets/homepage.png)
+```javascript
+const express = require('express');
+const routes = require('./controllers');
+const sequelize = require('./config/connection');
+const exphbs = require('express-handlebars');
+const path = require('path');
+const session = require('express-session');
+const helpers = require('./utils/helpers');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+```
 
 
 ## Credits
 
-N/A
+- [Font Awesome](https://fontawesome.com)
+- [Express](https://expressjs.com)
+- [MySQL](https://www.mysql.com)
+- [Sequelize](https://sequelize.org)
+- [Cloudinary](https://cloudinary.com)
+- [Heroku](https://id.heroku.com/login)
+
 
 ## License
 
